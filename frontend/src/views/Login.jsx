@@ -21,7 +21,7 @@ export default function Login({ setUtilizador }) {
     setMensagem({ texto: '', tipo: '' });
 
     try {
-      const resposta = await fetch('/api/login', {
+      const resposta = await fetch('https://ligacao-backend.onrender.com/api/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password })

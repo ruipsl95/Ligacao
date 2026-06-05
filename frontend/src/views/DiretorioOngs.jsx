@@ -6,7 +6,7 @@ export default function DiretorioOngs() {
   const [aCarregar, setACarregar] = useState(true);
 
   useEffect(() => {
-    fetch('/api/ongs')
+    fetch('https://ligacao-backend.onrender.com/api/ongs')
       .then(resposta => resposta.json())
       .then(dados => {
         setOngs(dados);

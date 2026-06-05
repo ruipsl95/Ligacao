@@ -24,7 +24,7 @@ export default function EditarPerfil() {
       return;
     }
 
-    fetch('/api/perfil', {
+    fetch('https://ligacao-backend.onrender.com/api/perfil', {
       headers: { 'Authorization': `Bearer ${token}` }
     })
       .then(res => res.json())
@@ -49,7 +49,7 @@ export default function EditarPerfil() {
   const guardarAlteracoes = async (e) => {
     e.preventDefault();
     try {
-      const resposta = await fetch('/api/perfil', {
+      const resposta = await fetch('https://ligacao-backend.onrender.com/api/perfil', {
         method: 'PUT',
         headers: { 
           'Content-Type': 'application/json',

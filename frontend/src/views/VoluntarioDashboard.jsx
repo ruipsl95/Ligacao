@@ -22,11 +22,11 @@ export default function VoluntarioDashboard({ fazerLogout }) {
 
   useEffect(() => {
     Promise.all([
-      fetch('/api/vagas').then(res => res.json()),
-      fetch('/api/candidaturas/minhas', {
+      fetch('https://ligacao-backend.onrender.com/api/vagas').then(res => res.json()),
+      fetch('https://ligacao-backend.onrender.com/api/candidaturas/minhas', {
         headers: { 'Authorization': `Bearer ${token}` }
       }).then(res => res.json()),
-      fetch('/api/favoritos', {
+      fetch('https://ligacao-backend.onrender.com/api/favoritos', {
         headers: { 'Authorization': `Bearer ${token}` }
       }).then(res => res.json())
     ])
@@ -48,7 +48,7 @@ export default function VoluntarioDashboard({ fazerLogout }) {
 
   const alternarFavorito = async (vagaId) => {
     try {
-      const resposta = await fetch('/api/favoritos', {
+      const resposta = await fetch('https://ligacao-backend.onrender.com/api/favoritos', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
         body: JSON.stringify({ vagaId })
@@ -57,7 +57,7 @@ export default function VoluntarioDashboard({ fazerLogout }) {
         const novaListaIds = await resposta.json();
         setFavoritosIds(novaListaIds);
         
-        const resFavs = await fetch('/api/favoritos', { headers: { 'Authorization': `Bearer ${token}` } });
+        const resFavs = await fetch('https://ligacao-backend.onrender.com/api/favoritos', { headers: { 'Authorization': `Bearer ${token}` } });
         const dataFavs = await resFavs.json();
         setVagasGuardadasDados(Array.isArray(dataFavs) ? dataFavs : []);
       }

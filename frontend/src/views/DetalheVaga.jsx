@@ -35,7 +35,7 @@ export default function DetalheVaga() {
     }
 
     try {
-      const resposta = await fetch('/api/candidaturas', {
+      const resposta = await fetch('https://ligacao-backend.onrender.com/api/candidaturas', {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json',

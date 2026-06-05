@@ -23,7 +23,7 @@ export default function Registo() {
     setErro('');
 
     try {
-      const resposta = await fetch('/api/registo', {
+      const resposta = await fetch('https://ligacao-backend.onrender.com/api/registo', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ nome, email, password, tipo })
