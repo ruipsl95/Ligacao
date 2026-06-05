@@ -31,7 +31,7 @@ export default function OngDashboard({ fazerLogout }) {
   // CARREGAMENTO DE DADOS
   // =====================================
   const carregarVagas = () => {
-    fetch('http://127.0.0.1:3001/api/vagas')
+    fetch('/api/vagas')
       .then(res => res.json())
       .then(data => setVagas(data))
       .catch(erro => console.error("Erro ao carregar vagas:", erro));
@@ -39,7 +39,7 @@ export default function OngDashboard({ fazerLogout }) {
 
   const carregarCandidaturas = async () => {
     try {
-      const resposta = await fetch('http://127.0.0.1:3001/api/candidaturas/minhas-vagas', {
+      const resposta = await fetch('/api/candidaturas/minhas-vagas', {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       if (resposta.ok) {
@@ -53,7 +53,7 @@ export default function OngDashboard({ fazerLogout }) {
 
   const carregarCausas = async () => {
     try {
-      const res = await fetch('http://127.0.0.1:3001/api/causas');
+      const res = await fetch('/api/causas');
       const data = await res.json();
       setCausas(data);
     } catch (erro) {
@@ -74,7 +74,7 @@ export default function OngDashboard({ fazerLogout }) {
   const submeterNovaCausa = async (e) => {
     e.preventDefault();
     try {
-      const resposta = await fetch('http://127.0.0.1:3001/api/causas', {
+      const resposta = await fetch('/api/causas', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
         body: JSON.stringify({ nome: novaCausaNome })
@@ -94,7 +94,7 @@ export default function OngDashboard({ fazerLogout }) {
   const removerCausa = async (id) => {
     if (!window.confirm('Tem a certeza que deseja remover esta causa?')) return;
     try {
-      await fetch(`http://127.0.0.1:3001/api/causas/${id}`, {
+      await fetch(`/api/causas/${id}`, {
         method: 'DELETE', headers: { 'Authorization': `Bearer ${token}` }
       });
       carregarCausas();
@@ -108,7 +108,7 @@ export default function OngDashboard({ fazerLogout }) {
   // =====================================
   const mudarEstadoCandidatura = async (id, novoEstado) => {
     try {
-      const resposta = await fetch(`http://127.0.0.1:3001/api/candidaturas/${id}/estado`, {
+      const resposta = await fetch(`/api/candidaturas/${id}/estado`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
         // A CORREÇÃO ESTÁ AQUI (enviar "novoEstado" como propriedade):
@@ -129,7 +129,7 @@ export default function OngDashboard({ fazerLogout }) {
   const guardarVaga = async (e) => {
     e.preventDefault();
     const metodo = idEdicao ? 'PUT' : 'POST';
-    const url = idEdicao ? `http://127.0.0.1:3001/api/vagas/${idEdicao}` : 'http://127.0.0.1:3001/api/vagas';
+    const url = idEdicao ? `/api/vagas/${idEdicao}` : '/api/vagas';
 
     try {
       const resposta = await fetch(url, {
@@ -150,7 +150,7 @@ export default function OngDashboard({ fazerLogout }) {
   const removerVaga = async (id) => {
     if (!window.confirm('Remover esta oportunidade?')) return;
     try {
-      await fetch(`http://127.0.0.1:3001/api/vagas/${id}`, {
+      await fetch(`/api/vagas/${id}`, {
         method: 'DELETE', headers: { 'Authorization': `Bearer ${token}` }
       });
       setVagas(vagas.filter(v => v._id !== id));

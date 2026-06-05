@@ -12,8 +12,8 @@ export default function PerfilOng() {
   useEffect(() => {
   
     Promise.all([
-      fetch(`http://127.0.0.1:3001/api/ongs/${id}`).then(res => res.json()),
-      fetch(`http://127.0.0.1:3001/api/ongs/${id}/vagas`).then(res => res.json())
+      fetch(`/api/ongs/${id}`).then(res => res.json()),
+      fetch(`/api/ongs/${id}/vagas`).then(res => res.json())
     ])
     .then(([dadosOng, dadosVagas]) => {
       setOng(dadosOng);

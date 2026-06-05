@@ -23,7 +23,7 @@ export default function Registo() {
     setErro('');
 
     try {
-      const resposta = await fetch('http://127.0.0.1:3001/api/registo', {
+      const resposta = await fetch('/api/registo', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ nome, email, password, tipo })

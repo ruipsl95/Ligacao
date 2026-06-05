@@ -24,7 +24,7 @@ export default function EditarPerfil() {
       return;
     }
 
-    fetch('http://127.0.0.1:3001/api/perfil', {
+    fetch('/api/perfil', {
       headers: { 'Authorization': `Bearer ${token}` }
     })
       .then(res => res.json())
@@ -49,7 +49,7 @@ export default function EditarPerfil() {
   const guardarAlteracoes = async (e) => {
     e.preventDefault();
     try {
-      const resposta = await fetch('http://127.0.0.1:3001/api/perfil', {
+      const resposta = await fetch('/api/perfil', {
         method: 'PUT',
         headers: { 
           'Content-Type': 'application/json',

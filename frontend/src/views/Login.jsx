@@ -21,7 +21,7 @@ export default function Login({ setUtilizador }) {
     setMensagem({ texto: '', tipo: '' });
 
     try {
-      const resposta = await fetch('http://127.0.0.1:3001/api/login', {
+      const resposta = await fetch('/api/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password })

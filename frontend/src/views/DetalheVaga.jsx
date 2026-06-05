@@ -11,7 +11,7 @@ export default function DetalheVaga() {
 
   // Carrega os dados desta vaga específica
   useEffect(() => {
-    fetch(`http://127.0.0.1:3001/api/vagas/${id}`)
+    fetch(`/api/vagas/${id}`)
       .then(res => res.json())
       .then(data => {
         if (data.erro) throw new Error(data.erro);
@@ -35,7 +35,7 @@ export default function DetalheVaga() {
     }
 
     try {
-      const resposta = await fetch('http://127.0.0.1:3001/api/candidaturas', {
+      const resposta = await fetch('/api/candidaturas', {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json',

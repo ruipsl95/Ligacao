@@ -6,7 +6,7 @@ export default function DiretorioOngs() {
   const [aCarregar, setACarregar] = useState(true);
 
   useEffect(() => {
-    fetch('http://127.0.0.1:3001/api/ongs')
+    fetch('/api/ongs')
       .then(resposta => resposta.json())
       .then(dados => {
         setOngs(dados);
