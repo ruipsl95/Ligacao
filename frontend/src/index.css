@@ -1,0 +1,19 @@
+/* src/index.css */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body, #root {
+  width: 100%;
+  min-height: 100vh;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background-color: #f9fafb;
+}
+
+/* Garante que as imagens ou SVGs não saem dos limites */
+img, svg {
+  max-width: 100%;
+  height: auto;
+}
