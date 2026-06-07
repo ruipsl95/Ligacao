@@ -73,7 +73,7 @@ export default function EditarPerfil() {
   return (
     <div style={{ backgroundColor: '#f9fafb', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
       
-      {/* Navbar Minimalista */}
+
       <nav style={{ padding: '20px 40px', backgroundColor: 'white', borderBottom: '1px solid #e5e7eb', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <h2 style={{ color: '#2563eb', margin: 0, fontSize: '1.5rem', fontWeight: '800' }}>Lig<span style={{ color: '#111827' }}>Ação</span></h2>
         <button onClick={() => navigate(-1)} style={{ background: 'none', border: 'none', color: '#6b7280', cursor: 'pointer', fontWeight: 'bold' }}>

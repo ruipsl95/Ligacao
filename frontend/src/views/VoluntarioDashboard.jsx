@@ -2,15 +2,13 @@ import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 export default function VoluntarioDashboard({ fazerLogout }) {
-  const [abaAtiva, setAbaAtiva] = useState('explorar'); // 'explorar', 'guardadas' ou 'minhas-candidaturas'
+  const [abaAtiva, setAbaAtiva] = useState('explorar'); 
   const [vagas, setVagas] = useState([]);
   const [candidaturas, setCandidaturas] = useState([]);
   
-  // Estados para os Favoritos
   const [vagasGuardadasDados, setVagasGuardadasDados] = useState([]);
   const [favoritosIds, setFavoritosIds] = useState([]);
   
-  // Estados para os Filtros do Wireframe
   const [filtroLocalizacao, setFiltroLocalizacao] = useState('');
   const [filtroCausa, setFiltroCausa] = useState('');
   const [filtroDisponibilidade, setFiltroDisponibilidade] = useState('');

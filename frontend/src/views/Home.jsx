@@ -21,7 +21,6 @@ export default function Home() {
                 </div>
             </nav>
 
-            {/* Hero Section */}
             <main style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '60px 20px', textAlign: 'center', backgroundColor: '#f9fafb' }}>
                 <div style={{ fontSize: '4rem', marginBottom: '20px' }}>🌍</div>
                 <h1 style={{ fontSize: '3.5rem', fontWeight: '900', color: '#111827', margin: '0 0 24px 0', maxWidth: '800px', lineHeight: '1.1' }}>
