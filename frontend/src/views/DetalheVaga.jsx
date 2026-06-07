@@ -11,7 +11,7 @@ export default function DetalheVaga() {
 
   // Carrega os dados desta vaga específica
   useEffect(() => {
-    fetch(`/api/vagas/${id}`)
+    fetch(`https://ligacao-backend.onrender.com/api/vagas/${id}`)
       .then(res => res.json())
       .then(data => {
         if (data.erro) throw new Error(data.erro);
