@@ -31,7 +31,7 @@ export default function OngDashboard({ fazerLogout }) {
   // CARREGAMENTO DE DADOS
   // =====================================
   const carregarVagas = () => {
-    fetch('https://ligacao-backend.onrender.comhttps://ligacao-backend.onrender.com/api/vagas')
+    fetch('https://ligacao-backend.onrender.com/api/vagas')
       .then(res => res.json())
       .then(data => setVagas(data))
       .catch(erro => console.error("Erro ao carregar vagas:", erro));
@@ -39,7 +39,7 @@ export default function OngDashboard({ fazerLogout }) {
 
   const carregarCandidaturas = async () => {
     try {
-      const resposta = await fetch('https://ligacao-backend.onrender.comhttps://ligacao-backend.onrender.com/api/candidaturas/minhas-vagas', {
+      const resposta = await fetch('https://ligacao-backend.onrender.com/api/candidaturas/minhas-vagas', {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       if (resposta.ok) {
@@ -53,7 +53,7 @@ export default function OngDashboard({ fazerLogout }) {
 
   const carregarCausas = async () => {
     try {
-      const res = await fetch('https://ligacao-backend.onrender.comhttps://ligacao-backend.onrender.com/api/causas');
+      const res = await fetch('https://ligacao-backend.onrender.com/api/causas');
       const data = await res.json();
       setCausas(data);
     } catch (erro) {
@@ -74,7 +74,7 @@ export default function OngDashboard({ fazerLogout }) {
   const submeterNovaCausa = async (e) => {
     e.preventDefault();
     try {
-      const resposta = await fetch('https://ligacao-backend.onrender.comhttps://ligacao-backend.onrender.com/api/causas', {
+      const resposta = await fetch('https://ligacao-backend.onrender.com/api/causas', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
         body: JSON.stringify({ nome: novaCausaNome })
