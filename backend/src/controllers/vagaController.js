@@ -2,11 +2,11 @@ const Vaga = require('../models/Vaga');
 
 exports.criarVaga = async (req, res) => {
   try {
-    console.log("Dados recebidos no backend para criar vaga:", req.body); // ADICIONA ISTO
+   const ongId = req.utilizador.id || req.utilizador.userId || req.utilizador._id;
     const { titulo, descricaoCurta, localizacao, disponibilidade, causa, imagem, vagasTotais } = req.body;
     const novaVaga = new Vaga({
       titulo, descricaoCurta, localizacao, disponibilidade, causa, imagem,
-      vagasTotais: vagasTotais || 1, ativa: true, ongId: req.utilizador.id
+      vagasTotais: vagasTotais || 1, ativa: true, ongId: ongId
     });
     await novaVaga.save();
     res.status(201).json(novaVaga);
