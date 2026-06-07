@@ -24,7 +24,7 @@ mongoose.connect(process.env.MONGO_URI)
   .catch(err => console.error('Erro ao ligar ao MongoDB:', err));
 
 // 2. LIGAÇÃO DAS ROTAS (Prefixos)
-app.use('/api', authRoutes); // O registo, login e perfil já ficam com /api/login, etc.
+app.use('/api', authRoutes); 
 app.use('/api/vagas', vagaRoutes);
 app.use('/api/ongs', ongRoutes);
 app.use('/api/candidaturas', candidaturaRoutes);  
@@ -32,5 +32,5 @@ app.use('/api/causas', causaRoutes);
 // 3. ARRANCAR O SERVIDOR
 const PORT = 3001;
 app.listen(PORT, () => {
-  console.log(`API a correr na porta ${PORT}!!!`); // <-- Muda o texto aqui
+  console.log(`API a correr na porta ${PORT}!!!`); 
 });
