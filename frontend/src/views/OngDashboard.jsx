@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 export default function OngDashboard({ fazerLogout }) {
-  // NOVO: Detetor de telemóvel
+
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
   // Estados de Navegação e Interface
@@ -28,20 +28,20 @@ export default function OngDashboard({ fazerLogout }) {
 
   const token = localStorage.getItem('token');
 
-  // NOVO: Listener de resize
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth <= 768);
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+    {/*Carregar vagas */}
   const carregarVagas = () => {
     fetch('https://ligacao-backend.onrender.com/api/vagas')
       .then(res => res.json())
       .then(data => setVagas(data))
       .catch(erro => console.error("Erro ao carregar vagas:", erro));
   };
-
+  {/*Carregar candidaturas */}
   const carregarCandidaturas = async () => {
     try {
       const resposta = await fetch('https://ligacao-backend.onrender.com/api/candidaturas/minhas-vagas', {
@@ -56,6 +56,7 @@ export default function OngDashboard({ fazerLogout }) {
     }
   };
 
+  {/*Carregar causas */}
   const carregarCausas = async () => {
     try {
       const res = await fetch('https://ligacao-backend.onrender.com/api/causas');
@@ -210,7 +211,7 @@ export default function OngDashboard({ fazerLogout }) {
           </div>
         )}
 
-        {/* ABAS (Adaptado: flexWrap para não cortar em ecrãs pequenos) */}
+        {/* ABAS*/}
         {!mostrarFormulario && (
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: isMobile ? '4px' : '12px', borderBottom: '2px solid #e5e7eb', marginBottom: '32px' }}>
             {['visao-geral', 'candidaturas', 'causas'].map((aba) => (
@@ -229,7 +230,7 @@ export default function OngDashboard({ fazerLogout }) {
            <h2 style={{ marginBottom: '24px', color: '#111827' }}>{idEdicao ? '✏️ Editar Oportunidade' : '📋 Nova Oportunidade'}</h2>
            <form onSubmit={guardarVaga} style={{ display: 'grid', gap: '20px' }}>
              
-             {/* GRID 1: Empilha no Mobile */}
+             {/* GRID 1 */}
              <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '2fr 1fr', gap: '20px' }}>
                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                  <label style={estiloLabel}>Título</label>
@@ -241,7 +242,7 @@ export default function OngDashboard({ fazerLogout }) {
                </div>
              </div>
 
-             {/* GRID 2: Empilha no Mobile */}
+             {/* GRID 2 */}
              <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap: '20px' }}>
                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                  <label style={estiloLabel}>Causa</label>
@@ -282,7 +283,7 @@ export default function OngDashboard({ fazerLogout }) {
           <>
             {abaAtiva === 'visao-geral' && (
               <>
-                {/* KPIS (Adaptado: 2 colunas no telemóvel em vez de 4) */}
+                {/* KPIS */}
                 <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr 1fr' : 'repeat(4, 1fr)', gap: '16px', marginBottom: '40px' }}>
                   <KpiCard titulo="Vagas Ativas" valor={kpiVagasAtivas} cor="#3b82f6" onClick={() => setAbaAtiva('visao-geral')} />
                   <KpiCard titulo="Precisos" valor={kpiVoluntariosNecessarios} cor="#10b981" onClick={() => setAbaAtiva('visao-geral')} />
