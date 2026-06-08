@@ -6,8 +6,18 @@ export default function Login({ setUtilizador }) {
   const [password, setPassword] = useState('');
   const [mensagem, setMensagem] = useState({ texto: '', tipo: '' });
   
+  // NOVO: Estado que deteta se o ecrã é de telemóvel (mobile)
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  
   const navigate = useNavigate();
   const location = useLocation();
+
+  // NOVO: Listener que atualiza o estado quando a janela muda de tamanho
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   useEffect(() => {
     if (location.state && location.state.mensagemSucesso) {
@@ -47,21 +57,39 @@ export default function Login({ setUtilizador }) {
   };
 
   return (
-    <div style={styles.page}>
-      {/* Lado Esquerdo - Hero Completo */}
-      <div style={styles.heroSide}>
-        <div style={styles.heroContent}>
-          <h1 style={styles.logo}>Lig<span style={styles.logoAccent}>Ação</span></h1>
-          <p style={styles.heroTagline}>Mude o mundo, uma conexão de cada vez.</p>
-          <p style={styles.heroDescription}>A plataforma que liga quem quer ajudar a quem precisa de ação.</p>
-          <div style={styles.heroIcon}>🤝</div>
+    // ADAPTADO: Muda de row para column se for mobile
+    <div style={{ ...styles.page, flexDirection: isMobile ? 'column' : 'row' }}>
+      
+      {/* Lado Esquerdo - Hero */}
+      <div style={{ 
+        ...styles.heroSide, 
+        flex: isMobile ? 'none' : '1 1 55%', 
+        padding: isMobile ? '40px 20px' : '60px',
+        textAlign: isMobile ? 'center' : 'left'
+      }}>
+        <div style={{ ...styles.heroContent, margin: isMobile ? '0 auto' : '0' }}>
+          <h1 style={{ ...styles.logo, fontSize: isMobile ? '2.5rem' : '3rem' }}>Lig<span style={styles.logoAccent}>Ação</span></h1>
+          <p style={{ ...styles.heroTagline, fontSize: isMobile ? '1.5rem' : '2rem' }}>Mude o mundo, uma conexão de cada vez.</p>
+          
+          {/* Esconde a descrição extra e o ícone no telemóvel para poupar espaço */}
+          {!isMobile && (
+            <>
+              <p style={styles.heroDescription}>A plataforma que liga quem quer ajudar a quem precisa de ação.</p>
+              <div style={styles.heroIcon}>🤝</div>
+            </>
+          )}
         </div>
       </div>
 
       {/* Lado Direito - Formulário */}
-      <div style={styles.formSide}>
+      <div style={{ 
+        ...styles.formSide, 
+        flex: isMobile ? '1' : '1 1 45%',
+        padding: isMobile ? '40px 20px' : '0',
+        alignItems: isMobile ? 'flex-start' : 'center'
+      }}>
         <div style={styles.formCard}>
-          <h2 style={styles.formTitle}>Bem-vindo de volta</h2>
+          <h2 style={{ ...styles.formTitle, textAlign: isMobile ? 'center' : 'left' }}>Bem-vindo de volta</h2>
           
           {mensagem.texto && (
             <div style={{ ...styles.message, backgroundColor: mensagem.tipo === 'sucesso' ? '#dcfce7' : '#fee2e2', color: mensagem.tipo === 'sucesso' ? '#166534' : '#991b1b' }}>
@@ -91,16 +119,17 @@ export default function Login({ setUtilizador }) {
   );
 }
 
+// ADAPTADO: Substitui 'height' por 'minHeight' para o telemóvel conseguir fazer scroll se precisar
 export const styles = {
-  page: { display: 'flex', width: '100vw', height: '100vh', backgroundColor: '#f9fafb', margin: 0, padding: 0 },
-  heroSide: { flex: '1 1 55%', background: 'linear-gradient(135deg, #1d4ed8 0%, #2563eb 100%)', display: 'flex', justifyContent: 'center', alignItems: 'center', color: 'white', padding: '60px' },
+  page: { display: 'flex', width: '100vw', minHeight: '100vh', backgroundColor: '#f9fafb', margin: 0, padding: 0 },
+  heroSide: { background: 'linear-gradient(135deg, #1d4ed8 0%, #2563eb 100%)', display: 'flex', justifyContent: 'center', alignItems: 'center', color: 'white' },
   heroContent: { maxWidth: '500px' },
-  logo: { fontSize: '3rem', fontWeight: '800', margin: '0 0 16px 0' },
+  logo: { fontWeight: '800', margin: '0 0 16px 0' },
   logoAccent: { color: '#ffffff' },
-  heroTagline: { fontSize: '2rem', fontWeight: '700', margin: '0 0 20px 0' },
+  heroTagline: { fontWeight: '700', margin: '0 0 20px 0' },
   heroDescription: { fontSize: '1rem', color: '#e0f2fe', margin: '0 0 40px 0' },
   heroIcon: { fontSize: '6rem', textAlign: 'center', opacity: '0.8' },
-  formSide: { flex: '1 1 45%', display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: 'white' },
+  formSide: { display: 'flex', justifyContent: 'center', backgroundColor: 'white' },
   formCard: { width: '100%', maxWidth: '400px' },
   formTitle: { fontSize: '1.8rem', fontWeight: '700', marginBottom: '32px' },
   form: { display: 'flex', flexDirection: 'column', gap: '20px' },
