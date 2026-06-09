@@ -94,7 +94,7 @@ export default function VoluntarioDashboard({ fazerLogout }) {
             <Link to="/perfil" style={{ color: '#d1d5db', textDecoration: 'none', fontWeight: '600', fontSize: isMobile ? '0.85rem' : '0.9rem' }}>
               {isMobile ? '⚙️ Perfil' : '⚙️ Definições de Conta'}
             </Link>
-            <button onClick={fazerLogout} style={{ backgroundColor: 'transparent', border: '1px solid #ef4444', color: '#ef4444', padding: isMobile ? '6px 12px' : '8px 16px', borderRadius: '6px', cursor: 'pointer', fontWeight: 'bold', fontSize: isMobile ? '0.85rem' : '1rem' }}>
+            <button onClick={fazerLogout} style={{ backgroundColor: 'transparent', border: '1px solid #ef4444', color: '#ef4444', padding: isMobile ? '6px 12px' : '6px 1px', borderRadius: '6px', cursor: 'pointer', fontWeight: 'bold', fontSize: isMobile ? '0.85rem' : '1rem' }}>
               Sair
             </button>
           </div>
