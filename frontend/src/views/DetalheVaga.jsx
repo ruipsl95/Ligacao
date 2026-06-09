@@ -9,7 +9,7 @@ export default function DetalheVaga() {
   const [mensagem, setMensagem] = useState({ texto: '', tipo: '' });
   const [aCarregar, setACarregar] = useState(true);
 
-  // Carrega os dados desta vaga específica
+ 
   useEffect(() => {
     fetch(`https://ligacao-backend.onrender.com/api/vagas/${id}`)
       .then(res => res.json())

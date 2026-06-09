@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 export default function VoluntarioDashboard({ fazerLogout }) {
-  // NOVO: Detetor de telemóvel
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
   const [abaAtiva, setAbaAtiva] = useState('explorar'); 
@@ -21,7 +20,6 @@ export default function VoluntarioDashboard({ fazerLogout }) {
   const navigate = useNavigate();
   const token = localStorage.getItem('token');
 
-  // NOVO: Listener de redimensionamento de janela
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth <= 768);
     window.addEventListener('resize', handleResize);
@@ -85,7 +83,6 @@ export default function VoluntarioDashboard({ fazerLogout }) {
   return (
     <div style={{ backgroundColor: '#f3f4f6', minHeight: '100vh', fontFamily: 'sans-serif' }}>
       
-      {/* CABEÇALHO (Adaptado) */}
       <header style={{ backgroundColor: '#111827', color: 'white', padding: '0' }}>
         <div style={{ padding: isMobile ? '16px 20px' : '20px 40px', display: 'flex', flexDirection: isMobile ? 'row' : 'row', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: isMobile ? '12px' : '0' }}>
           <div>
@@ -103,7 +100,6 @@ export default function VoluntarioDashboard({ fazerLogout }) {
           </div>
         </div>
 
-        {/* MENU DE SEPARADORES (Adaptado: scroll horizontal suave em telemóveis) */}
         <div style={{ display: 'flex', gap: '10px', padding: isMobile ? '0 20px' : '0 40px', backgroundColor: '#1f2937', overflowX: 'auto', whiteSpace: 'nowrap', scrollbarWidth: 'none', WebkitOverflowScrolling: 'touch' }}>
           <TabButton ativa={abaAtiva === 'explorar'} onClick={() => setAbaAtiva('explorar')} isMobile={isMobile}>
             🔍 Explorar
@@ -123,16 +119,11 @@ export default function VoluntarioDashboard({ fazerLogout }) {
           <div style={{ textAlign: 'center', marginTop: '50px', color: '#6b7280' }}>A carregar a sua área...</div>
         ) : (
           <>
-            {/* =========================================
-                ABA 1: EXPLORAR VAGAS
-            ========================================= */}
             {abaAtiva === 'explorar' && (
               <>
                 <h2 style={{ color: '#111827', marginBottom: '24px', fontSize: isMobile ? '1.5rem' : '1.8rem' }}>Oportunidades de Voluntariado</h2>
                 
-                {/* BARRA DE FILTROS (Adaptada: Flex Direction altera para 'column' no mobile) */}
                 <div style={{ display: 'flex', flexDirection: isMobile ? 'column' : 'row', gap: '16px', alignItems: isMobile ? 'stretch' : 'flex-end', marginBottom: '40px', backgroundColor: 'white', padding: isMobile ? '16px' : '24px', borderRadius: '12px', border: '1px solid #e5e7eb' }}>
-                  
                   <div style={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
                     <label style={{ fontSize: '0.85rem', fontWeight: 'bold', marginBottom: '8px', color: '#4b5563' }}>Onde?</label>
                     <select value={filtroLocalizacao} onChange={e => setFiltroLocalizacao(e.target.value)} style={estiloSelect}>
@@ -170,7 +161,6 @@ export default function VoluntarioDashboard({ fazerLogout }) {
                   </button>
                 </div>
 
-                {/* GRELHA DE VAGAS FILTRADAS */}
                 {vagasFiltradas.length === 0 ? (
                   <div style={{ backgroundColor: 'white', padding: '40px', borderRadius: '12px', border: '1px solid #e5e7eb', textAlign: 'center' }}>
                     <p style={{ color: '#6b7280', margin: 0 }}>Nenhuma oportunidade encontrada com esses filtros.</p>
@@ -180,7 +170,6 @@ export default function VoluntarioDashboard({ fazerLogout }) {
                     {vagasFiltradas.map(vaga => (
                       <div key={vaga._id} style={{ backgroundColor: 'white', borderRadius: '12px', border: '1px solid #e5e7eb', overflow: 'hidden', display: 'flex', flexDirection: 'column', position: 'relative' }}>
                         
-                        {/* BOTÃO DE CORAÇÃO DOS FAVORITOS */}
                         <button 
                           onClick={() => alternarFavorito(vaga._id)}
                           style={{ position: 'absolute', top: '12px', right: '12px', backgroundColor: 'white', border: 'none', borderRadius: '50%', width: '36px', height: '36px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', boxShadow: '0 2px 4px rgba(0,0,0,0.1)', fontSize: '1.2rem', zIndex: 10 }}
@@ -196,7 +185,6 @@ export default function VoluntarioDashboard({ fazerLogout }) {
                           <h3 style={{ margin: '0 0 8px 0', color: '#111827' }}>{vaga.titulo}</h3>
                           <p style={{ color: '#6b7280', fontSize: '0.9rem', marginBottom: '20px', flexGrow: 1 }}>📍 {vaga.localizacao}</p>
                           
-                          {/* LÓGICA DA BARRA DE PROGRESSO */}
                           {(() => {
                             const preenchidas = vaga.vagasPreenchidas || 0;
                             const totais = vaga.vagasTotais || 1;
@@ -225,9 +213,6 @@ export default function VoluntarioDashboard({ fazerLogout }) {
               </>
             )}
 
-            {/* =========================================
-                ABA 2: VAGAS GUARDADAS
-            ========================================= */}
             {abaAtiva === 'guardadas' && (
               <>
                 <h2 style={{ color: '#111827', marginBottom: '24px', fontSize: isMobile ? '1.5rem' : '1.8rem' }}>As Suas Vagas Guardadas</h2>
@@ -245,7 +230,6 @@ export default function VoluntarioDashboard({ fazerLogout }) {
                           onClick={() => alternarFavorito(vaga._id)}
                           style={{ position: 'absolute', top: '12px', right: '12px', backgroundColor: 'white', border: 'none', borderRadius: '50%', width: '36px', height: '36px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', boxShadow: '0 2px 4px rgba(0,0,0,0.1)', fontSize: '1.2rem', zIndex: 10 }}
                         >
-                           {/* Corrigido: Restaurado o ícone do coração para vagas guardadas */}
                            {favoritosIds.includes(vaga._id) ? '❤️' : '🤍'}
                         </button>
 
@@ -268,9 +252,6 @@ export default function VoluntarioDashboard({ fazerLogout }) {
               </>
             )}
 
-            {/* =========================================
-                ABA 3: AS MINHAS CANDIDATURAS
-            ========================================= */}
             {abaAtiva === 'minhas-candidaturas' && (
               <>
                 <h2 style={{ color: '#111827', marginBottom: '24px', fontSize: isMobile ? '1.5rem' : '1.8rem' }}>Estado das Candidaturas</h2>
@@ -283,7 +264,7 @@ export default function VoluntarioDashboard({ fazerLogout }) {
                 ) : (
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
                     {candidaturas.map(cand => (
-                      <div key={cand._id} style={{ backgroundColor: 'white', borderRadius: '12px', padding: isMobile ? '16px' : '24px', border: '1px solid #e5e7eb', display: 'flex', flexDirection: isMobile ? 'column' : 'row', justifyContent: 'space-between', alignItems: isMobile ? 'flex-start' : 'center', gap: isMobile ? '16px' : '0' }}>
+                      <div key={cand._id} style={{ backgroundColor: 'white', borderRadius: '12px', padding: isMobile ? '16px' : '24px', border: '1px solid #e5e7eb', display: 'flex', flexDirection: isMobile ? 'column' : 'row', justifyContent: 'space-between', alignItems: isMobile ? 'flex-start' : 'center', gap: isMobile ? '12px' : '0' }}>
                         
                         <div>
                           <h3 style={{ margin: '0 0 8px 0', color: '#111827', fontSize: isMobile ? '1.1rem' : '1.17em' }}>{cand.vagaId?.titulo || 'Vaga Removida'}</h3>
@@ -292,14 +273,23 @@ export default function VoluntarioDashboard({ fazerLogout }) {
                           </p>
                         </div>
 
-                        <div style={{ width: isMobile ? '100%' : 'auto', textAlign: 'center', padding: '8px 16px', borderRadius: '20px', fontWeight: 'bold', fontSize: '0.9rem',
+                        {/* CORREÇÃO DO CRACHÁ */}
+                        <div style={{ 
+                          width: 'fit-content', // Mantém o tamanho ajustado ao texto
+                          boxSizing: 'border-box', // Garante que o padding não quebra o layout
+                          textAlign: 'center', 
+                          padding: '6px 16px', 
+                          borderRadius: '20px', 
+                          fontWeight: 'bold', 
+                          fontSize: '0.9rem',
+                          alignSelf: isMobile ? 'flex-start' : 'center', // Alinha à esquerda no mobile
                           backgroundColor: cand.estado === 'pendente' ? '#fef3c7' : cand.estado === 'aceite' ? '#dcfce7' : '#fee2e2',
                           color: cand.estado === 'pendente' ? '#d97706' : cand.estado === 'aceite' ? '#166534' : '#991b1b',
                           border: `1px solid ${cand.estado === 'pendente' ? '#fde68a' : cand.estado === 'aceite' ? '#bbf7d0' : '#fecaca'}`
                         }}>
-                          {cand.estado === 'pendente' && '⏳ Em Análise'}
-                          {cand.estado === 'aceite' && '🎉 Aceite!'}
-                          {cand.estado === 'rejeitada' && '❌ Não Selecionado'}
+                          {cand.estado === 'pendente' && 'Em Análise'}
+                          {cand.estado === 'aceite' && 'Aceite!'}
+                          {cand.estado === 'rejeitada' && 'Não Selecionado'}
                         </div>
 
                       </div>
@@ -316,7 +306,6 @@ export default function VoluntarioDashboard({ fazerLogout }) {
   );
 }
 
-// Componentes Auxiliares (Adaptados para receber isMobile)
 function TabButton({ children, ativa, onClick, isMobile }) {
   return (
     <button onClick={onClick} style={{ padding: isMobile ? '16px 12px' : '16px 24px', backgroundColor: 'transparent', border: 'none', borderBottom: ativa ? '4px solid #3b82f6' : '4px solid transparent', color: ativa ? 'white' : '#9ca3af', fontSize: isMobile ? '0.9rem' : '1rem', fontWeight: ativa ? 'bold' : '600', cursor: 'pointer', transition: 'all 0.2s' }}>
