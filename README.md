@@ -59,12 +59,6 @@ cd frontend
 npm install
 ```
 
-*(Opcional)* Se usares variáveis de ambiente no frontend (ex: URL da API), cria um ficheiro `.env` na pasta `frontend`:
-
-```env
-VITE_API_URL=http://localhost:5000/api
-```
-
 Inicia a aplicação React:
 
 ```bash
