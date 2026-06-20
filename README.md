@@ -43,19 +43,6 @@ cd backend
 npm install
 ```
 
-Cria um ficheiro chamado `.env` na raiz da pasta `backend` e adiciona as seguintes variáveis de ambiente:
-
-```env
-# Porta onde o servidor vai correr
-PORT=5000
-
-# URI de ligação à base de dados MongoDB
-MONGODB_URI=mongodb+srv://<username>:<password>@cluster0.mongodb.net/ligacao?retryWrites=true&w=majority
-
-# Chave secreta para a geração dos tokens JWT
-JWT_SECRET=A_TUA_CHAVE_SECRETA_AQUI
-```
-
 Inicia o servidor em modo de desenvolvimento:
 
 ```bash
