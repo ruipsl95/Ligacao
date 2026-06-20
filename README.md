@@ -30,15 +30,22 @@ O projeto está dividido em duas partes: `backend` e `frontend`. Terás de confi
 ### 1. Clonar o Repositório
 
 ```bash
-git clone [https://github.com/O_TEU_NOME_DE_UTILIZADOR/ligacao.git](https://github.com/O_TEU_NOME_DE_UTILIZADOR/ligacao.git)
-cd ligacao
-2. Configuração do Backend
+git clone [https://github.com/ruipsl95/Ligacao.git](https://github.com/ruipsl95/Ligacao.git)
+cd Ligacao
+```
+
+### 2. Configuração do Backend
+
 Abre um terminal e navega para a pasta do servidor:
-Bash
+
+```bash
 cd backend
 npm install
-Cria um ficheiro chamado .env na raiz da pasta backend e adiciona as seguintes variáveis de ambiente:
-Fragmento do código
+```
+
+Cria um ficheiro chamado `.env` na raiz da pasta `backend` e adiciona as seguintes variáveis de ambiente:
+
+```env
 # Porta onde o servidor vai correr
 PORT=5000
 
@@ -47,33 +54,57 @@ MONGODB_URI=mongodb+srv://<username>:<password>@cluster0.mongodb.net/ligacao?ret
 
 # Chave secreta para a geração dos tokens JWT
 JWT_SECRET=A_TUA_CHAVE_SECRETA_AQUI
+```
+
 Inicia o servidor em modo de desenvolvimento:
-Bash
+
+```bash
 npm run dev
 # O servidor deverá iniciar na porta 5000 (ex: http://localhost:5000)
-3. Configuração do Frontend
-Abre um novo terminal (mantendo o do backend a correr) e navega para a pasta do cliente:
-Bash
+```
+
+### 3. Configuração do Frontend
+
+Abre um **novo** terminal (mantendo o do backend a correr) e navega para a pasta do cliente:
+
+```bash
 cd frontend
 npm install
-(Opcional) Se usares variáveis de ambiente no frontend (ex: URL da API), cria um ficheiro .env na pasta frontend:
-Fragmento do código
+```
+
+*(Opcional)* Se usares variáveis de ambiente no frontend (ex: URL da API), cria um ficheiro `.env` na pasta `frontend`:
+
+```env
 VITE_API_URL=http://localhost:5000/api
+```
+
 Inicia a aplicação React:
-Bash
+
+```bash
 npm run dev
 # O frontend deverá iniciar geralmente em http://localhost:5173
-🔑 Credenciais de Teste
+```
+
+---
+
+## 🔑 Credenciais de Teste
+
 Para facilitar a avaliação e o teste da plataforma, a base de dados já se encontra configurada com contas de demonstração para ambos os perfis.
-Acesso Instituição (ONG):
-E-mail: ong@teste.pt
-Password: TesteOng2026
-Acesso Voluntário:
-E-mail: voluntario@teste.pt
-Password: TesteVoluntario2026
-🚀 Funcionalidades Principais
-Registo e Autenticação Dinâmica: Redirecionamento condicionado ao tipo de perfil criado (ONG ou Voluntário).
-Dashboard ONG: Gestão CRUD de oportunidades, aceitação/rejeição de candidaturas e KPIs dinâmicos.
-Dashboard Voluntário: Catálogo de vagas, sistema de favoritos e acompanhamento do estado das candidaturas.
-Sistema de Metas: Cálculo em tempo real do preenchimento das vagas e fecho automático quando a meta de voluntários é atingida.
-Totalmente Responsivo: Abordagem Mobile-First, garantindo uma excelente experiência em qualquer dispositivo.
+
+**Acesso Instituição (ONG):**
+* **E-mail:** `ong@teste.pt`
+* **Password:** `TesteOng2026`
+
+**Acesso Voluntário:**
+* **E-mail:** `voluntario@teste.pt`
+* **Password:** `TesteVoluntario2026`
+
+---
+
+## 🚀 Funcionalidades Principais
+
+* **Registo e Autenticação Dinâmica:** Redirecionamento condicionado ao tipo de perfil criado (ONG ou Voluntário).
+* **Dashboard ONG:** Gestão CRUD de oportunidades, aceitação/rejeição de candidaturas e KPIs dinâmicos.
+* **Dashboard Voluntário:** Catálogo de vagas, sistema de favoritos e acompanhamento do estado das candidaturas.
+* **Sistema de Metas:** Cálculo em tempo real do preenchimento das vagas e fecho automático quando a meta de voluntários é atingida.
+* **Totalmente Responsivo:** Abordagem Mobile-First, garantindo uma excelente experiência em qualquer dispositivo.
